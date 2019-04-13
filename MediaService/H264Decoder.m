@@ -43,7 +43,7 @@ static void decodeOutputDataCallback(void *decompressionOutputRefCon, void *sour
 
 /**
  初始化解码器
-
+ 
  @return 结果
  */
 -(BOOL)initH264Decoder
@@ -52,7 +52,11 @@ static void decodeOutputDataCallback(void *decompressionOutputRefCon, void *sour
     {
         return YES;
     }
+    return [self setupDecoder];
     
+}
+
+- (BOOL)setupDecoder{
     const uint8_t* const parameterSetPointers[2] = {_sps, _pps};
     const size_t parameterSetSizes[2] = {_spsSize, _ppsSize};
     // 根据sps pps创建解码视频参数
@@ -87,7 +91,7 @@ static void decodeOutputDataCallback(void *decompressionOutputRefCon, void *sour
 
 /**
  解码数据
-
+ 
  @param frame 数据
  @param frameSize 数据长度
  */
@@ -117,6 +121,8 @@ static void decodeOutputDataCallback(void *decompressionOutputRefCon, void *sour
     if(decodeStatus == kVTInvalidSessionErr)
     {
         NSLog(@"H264Decoder::Invalid session, reset decoder session");
+        [self setupDecoder];
+        
     }
     else if(decodeStatus == kVTVideoDecoderBadDataErr)
     {
@@ -135,7 +141,7 @@ static void decodeOutputDataCallback(void *decompressionOutputRefCon, void *sour
 
 /**
  解码NALU数据
-
+ 
  @param naluData NALU数据
  */
 -(void)decodeNaluData:(NSData *)naluData
