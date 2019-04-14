@@ -54,7 +54,7 @@
 
 /**
  初始化方法
- 
+
  @param param 编码参数
  @return 实例
  */
@@ -68,7 +68,7 @@
     return self;
 }
 
-
+    
 - (BOOL)setUpEncoder{
     
     // 创建硬编码器
@@ -158,7 +158,7 @@
 
 /**
  开始编码
- 
+
  @return 结果
  */
 - (BOOL)startVideoEncode
@@ -168,7 +168,7 @@
         NSLog(@"VEVideoEncoder::调用顺序错误");
         return NO;
     }
-    
+   
     // 编码器准备编码
     OSStatus status = VTCompressionSessionPrepareToEncodeFrames(_compressionSessionRef);
     if (noErr != status)
@@ -181,7 +181,7 @@
 
 /**
  停止编码
- 
+
  @return 结果
  */
 - (BOOL)stopVideoEncode
@@ -203,7 +203,7 @@
 
 /**
  编码过程中调整码率
- 
+
  @param bitRate 码率
  @return 结果
  */
@@ -240,7 +240,7 @@
 
 /**
  输入待编码数据
- 
+
  @param sampleBuffer 待编码数据
  @param forceKeyFrame 是否强制I帧
  @return 结果

@@ -43,7 +43,7 @@ static void decodeOutputDataCallback(void *decompressionOutputRefCon, void *sour
 
 /**
  初始化解码器
- 
+
  @return 结果
  */
 -(BOOL)initH264Decoder
@@ -91,7 +91,7 @@ static void decodeOutputDataCallback(void *decompressionOutputRefCon, void *sour
 
 /**
  解码数据
- 
+
  @param frame 数据
  @param frameSize 数据长度
  */
@@ -141,7 +141,7 @@ static void decodeOutputDataCallback(void *decompressionOutputRefCon, void *sour
 
 /**
  解码NALU数据
- 
+
  @param naluData NALU数据
  */
 -(void)decodeNaluData:(NSData *)naluData

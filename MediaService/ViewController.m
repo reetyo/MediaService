@@ -51,9 +51,9 @@
     
     // 初始化并开启视频编码
     VEVideoEncoderParam *encodeParam = [[VEVideoEncoderParam alloc] init];
-    encodeParam.encodeWidth = 180;
-    encodeParam.encodeHeight = 320;
-    encodeParam.bitRate = 512 * 1024;
+    encodeParam.encodeWidth = 720;
+    encodeParam.encodeHeight = 1280;
+    encodeParam.bitRate = 4 * 1024 * 1024;
     _videoEncoder = [[VEVideoEncoder alloc] initWithParam:encodeParam];
     _videoEncoder.delegate = self;
     [_videoEncoder startVideoEncode];

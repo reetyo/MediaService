@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A58FD65226322BC0005029B /* CYMetalFliter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A58FD64226322BC0005029B /* CYMetalFliter.m */; };
+		4A58FD68226322FE0005029B /* CYMetalTextureOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A58FD67226322FE0005029B /* CYMetalTextureOutput.m */; };
 		A50A296420DD4C42006757F9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A50A296320DD4C42006757F9 /* AppDelegate.m */; };
 		A50A296720DD4C42006757F9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A50A296620DD4C42006757F9 /* ViewController.m */; };
 		A50A296C20DD4C43006757F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A50A296B20DD4C43006757F9 /* Assets.xcassets */; };
@@ -24,6 +26,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4A58FD63226322BC0005029B /* CYMetalFliter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYMetalFliter.h; sourceTree = "<group>"; };
+		4A58FD64226322BC0005029B /* CYMetalFliter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CYMetalFliter.m; sourceTree = "<group>"; };
+		4A58FD66226322FE0005029B /* CYMetalTextureOutput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYMetalTextureOutput.h; sourceTree = "<group>"; };
+		4A58FD67226322FE0005029B /* CYMetalTextureOutput.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CYMetalTextureOutput.m; sourceTree = "<group>"; };
+		4A58FD69226323160005029B /* CYMetalTextureInput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYMetalTextureInput.h; sourceTree = "<group>"; };
 		A50A295F20DD4C42006757F9 /* MediaService.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MediaService.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A50A296220DD4C42006757F9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A50A296320DD4C42006757F9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -63,6 +70,64 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4A58FD522261C9C80005029B /* decode */ = {
+			isa = PBXGroup;
+			children = (
+				A515930520EBBAA1004203E2 /* H264Decoder.h */,
+				A515930420EBBAA1004203E2 /* H264Decoder.m */,
+			);
+			path = decode;
+			sourceTree = "<group>";
+		};
+		4A58FD532261C9DF0005029B /* encode */ = {
+			isa = PBXGroup;
+			children = (
+				A515930820EBBC7D004203E2 /* VEVideoEncoder.h */,
+				A515930720EBBC7D004203E2 /* VEVideoEncoder.m */,
+			);
+			path = encode;
+			sourceTree = "<group>";
+		};
+		4A58FD542261CA210005029B /* capture */ = {
+			isa = PBXGroup;
+			children = (
+				A51592FE20EBBA96004203E2 /* VCVideoCapturer.h */,
+				A515930120EBBA97004203E2 /* VCVideoCapturer.m */,
+			);
+			path = capture;
+			sourceTree = "<group>";
+		};
+		4A58FD552261CA2E0005029B /* player */ = {
+			isa = PBXGroup;
+			children = (
+				A515930020EBBA96004203E2 /* VPVideoStreamPlayLayer.h */,
+				A51592FF20EBBA96004203E2 /* VPVideoStreamPlayLayer.m */,
+				B521A9D22123CDD9003F9397 /* MetalPlayer.h */,
+				B521A9D32123CDD9003F9397 /* MetalPlayer.m */,
+			);
+			path = player;
+			sourceTree = "<group>";
+		};
+		4A58FD562261CA3E0005029B /* shader */ = {
+			isa = PBXGroup;
+			children = (
+				B521A9D52123D1A6003F9397 /* Shaders.metal */,
+			);
+			path = shader;
+			sourceTree = "<group>";
+		};
+		4A58FD6122631C2D0005029B /* fliter */ = {
+			isa = PBXGroup;
+			children = (
+				4A58FD69226323160005029B /* CYMetalTextureInput.h */,
+				4A58FD66226322FE0005029B /* CYMetalTextureOutput.h */,
+				4A58FD67226322FE0005029B /* CYMetalTextureOutput.m */,
+				4A58FD63226322BC0005029B /* CYMetalFliter.h */,
+				4A58FD64226322BC0005029B /* CYMetalFliter.m */,
+			);
+			path = fliter;
+			sourceTree = "<group>";
+		};
 		A50A295620DD4C42006757F9 = {
 			isa = PBXGroup;
 			children = (
@@ -83,21 +148,16 @@
 		A50A296120DD4C42006757F9 /* MediaService */ = {
 			isa = PBXGroup;
 			children = (
+				4A58FD6122631C2D0005029B /* fliter */,
+				4A58FD562261CA3E0005029B /* shader */,
+				4A58FD552261CA2E0005029B /* player */,
+				4A58FD542261CA210005029B /* capture */,
+				4A58FD532261C9DF0005029B /* encode */,
+				4A58FD522261C9C80005029B /* decode */,
 				A50A296220DD4C42006757F9 /* AppDelegate.h */,
 				A50A296320DD4C42006757F9 /* AppDelegate.m */,
 				A50A296520DD4C42006757F9 /* ViewController.h */,
 				A50A296620DD4C42006757F9 /* ViewController.m */,
-				A51592FE20EBBA96004203E2 /* VCVideoCapturer.h */,
-				A515930120EBBA97004203E2 /* VCVideoCapturer.m */,
-				A515930020EBBA96004203E2 /* VPVideoStreamPlayLayer.h */,
-				A51592FF20EBBA96004203E2 /* VPVideoStreamPlayLayer.m */,
-				B521A9D22123CDD9003F9397 /* MetalPlayer.h */,
-				B521A9D32123CDD9003F9397 /* MetalPlayer.m */,
-				B521A9D52123D1A6003F9397 /* Shaders.metal */,
-				A515930520EBBAA1004203E2 /* H264Decoder.h */,
-				A515930420EBBAA1004203E2 /* H264Decoder.m */,
-				A515930820EBBC7D004203E2 /* VEVideoEncoder.h */,
-				A515930720EBBC7D004203E2 /* VEVideoEncoder.m */,
 				A50A296B20DD4C43006757F9 /* Assets.xcassets */,
 				A50A296D20DD4C43006757F9 /* LaunchScreen.storyboard */,
 				A50A297020DD4C43006757F9 /* Info.plist */,
@@ -190,6 +250,8 @@
 				A515930620EBBAA1004203E2 /* H264Decoder.m in Sources */,
 				A50A296720DD4C42006757F9 /* ViewController.m in Sources */,
 				A50A297220DD4C44006757F9 /* main.m in Sources */,
+				4A58FD68226322FE0005029B /* CYMetalTextureOutput.m in Sources */,
+				4A58FD65226322BC0005029B /* CYMetalFliter.m in Sources */,
 				A50A296420DD4C42006757F9 /* AppDelegate.m in Sources */,
 				B521A9D62123D1A6003F9397 /* Shaders.metal in Sources */,
 				A515930320EBBA97004203E2 /* VCVideoCapturer.m in Sources */,
@@ -326,7 +388,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = F7NY7XL5K6;
+				DEVELOPMENT_TEAM = M5YWM2VBMK;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = MediaService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -341,7 +403,7 @@
 					"$(PROJECT_DIR)/MediaService/3th-party/librtmp/lib",
 					"$(PROJECT_DIR)/MediaService/3th-party/libyuv/lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.chenjiannan.MediaService;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cy.videosession;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -352,7 +414,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = F7NY7XL5K6;
+				DEVELOPMENT_TEAM = M5YWM2VBMK;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = MediaService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -367,7 +429,7 @@
 					"$(PROJECT_DIR)/MediaService/3th-party/librtmp/lib",
 					"$(PROJECT_DIR)/MediaService/3th-party/libyuv/lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.chenjiannan.MediaService;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cy.videosession;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

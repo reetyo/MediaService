@@ -40,8 +40,7 @@
 @property (nonatomic, weak) id<VCVideoCapturerDelegate> delegate;
 /** 预览图层，把这个图层加在View上并且为这个图层设置frame就能播放  */
 @property (nonatomic, strong, readonly) AVCaptureVideoPreviewLayer *videoPreviewLayer;
-/** 视频采集参数 */
-@property (nonatomic, strong) VCVideoCapturerParam *captureParam;
+
 /**
  初始化方法
 

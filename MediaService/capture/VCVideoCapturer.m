@@ -17,7 +17,7 @@
     {
         _devicePosition = AVCaptureDevicePositionFront;
         _sessionPreset = AVCaptureSessionPreset1280x720;
-        _frameRate = 15;
+        _frameRate = 30;
         _videoOrientation = AVCaptureVideoOrientationPortrait;
         
         switch ([UIDevice currentDevice].orientation)
@@ -41,7 +41,6 @@
 
 @end
 
-
 @interface VCVideoCapturer () <AVCaptureVideoDataOutputSampleBufferDelegate>
 
 /** 采集会话 */
@@ -58,6 +57,10 @@
 @property (nonatomic, strong) AVCaptureConnection *captureConnection;
 /** 是否已经在采集 */
 @property (nonatomic, assign) BOOL isCapturing;
+
+/** 视频采集参数 */
+@property (nonatomic, strong) VCVideoCapturerParam *captureParam;
+
 
 @end
 
@@ -95,7 +98,7 @@
         }
         
         
-        /****************** 设置输出设备 ************************/
+        /****************** 设置输出 ************************/
         
         // 设置视频输出
         self.captureVideoDataOutput = [[AVCaptureVideoDataOutput alloc] init];
@@ -277,7 +280,6 @@
     {
         self.captureConnection.videoMirrored = YES;
     }
-    self.captureConnection.videoOrientation = self.captureParam.videoOrientation;
     self.captureConnection.videoOrientation = self.captureParam.videoOrientation;
 
     
