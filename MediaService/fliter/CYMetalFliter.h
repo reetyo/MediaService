@@ -10,6 +10,13 @@
 #import "CYMetalTextureOutput.h"
 #import "CYMetalTextureInput.h"
 
+
 @interface CYMetalFliter : CYMetalTextureOutput <CYMetalTextureInput>
+
+@property (nonatomic,strong) id<MTLDevice> device;
+@property (nonatomic,strong) id<MTLCommandBuffer> commandBuffer;
+
+- (instancetype)initWithDevice:(id<MTLDevice>)device;
+- (void)setup;
 
 @end

@@ -7,7 +7,11 @@
 //
 
 #import <CoreVideo/CVMetalTextureCache.h>
+#import <Metal/Metal.h>
 
 @protocol CYMetalTextureInput <NSObject>
-- (void)processTexture:(id <MTLTexture>) texture;
+
+- (void)newFrameReady;
+- (void)setProcessFrame:(id<MTLTexture>)texture;
+
 @end

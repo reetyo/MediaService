@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		4A58FD65226322BC0005029B /* CYMetalFliter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A58FD64226322BC0005029B /* CYMetalFliter.m */; };
 		4A58FD68226322FE0005029B /* CYMetalTextureOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A58FD67226322FE0005029B /* CYMetalTextureOutput.m */; };
+		4AB290932273F32000C243B6 /* CYMetalDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB290922273F32000C243B6 /* CYMetalDataSource.m */; };
+		4ACC9B3022632995009F454F /* CYMetalColorConvertFliter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACC9B2F22632995009F454F /* CYMetalColorConvertFliter.m */; };
 		A50A296420DD4C42006757F9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A50A296320DD4C42006757F9 /* AppDelegate.m */; };
 		A50A296720DD4C42006757F9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A50A296620DD4C42006757F9 /* ViewController.m */; };
 		A50A296C20DD4C43006757F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A50A296B20DD4C43006757F9 /* Assets.xcassets */; };
@@ -31,6 +33,10 @@
 		4A58FD66226322FE0005029B /* CYMetalTextureOutput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYMetalTextureOutput.h; sourceTree = "<group>"; };
 		4A58FD67226322FE0005029B /* CYMetalTextureOutput.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CYMetalTextureOutput.m; sourceTree = "<group>"; };
 		4A58FD69226323160005029B /* CYMetalTextureInput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYMetalTextureInput.h; sourceTree = "<group>"; };
+		4AB290912273F32000C243B6 /* CYMetalDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYMetalDataSource.h; sourceTree = "<group>"; };
+		4AB290922273F32000C243B6 /* CYMetalDataSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CYMetalDataSource.m; sourceTree = "<group>"; };
+		4ACC9B2E22632995009F454F /* CYMetalColorConvertFliter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYMetalColorConvertFliter.h; sourceTree = "<group>"; };
+		4ACC9B2F22632995009F454F /* CYMetalColorConvertFliter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CYMetalColorConvertFliter.m; sourceTree = "<group>"; };
 		A50A295F20DD4C42006757F9 /* MediaService.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MediaService.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A50A296220DD4C42006757F9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A50A296320DD4C42006757F9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -124,6 +130,10 @@
 				4A58FD67226322FE0005029B /* CYMetalTextureOutput.m */,
 				4A58FD63226322BC0005029B /* CYMetalFliter.h */,
 				4A58FD64226322BC0005029B /* CYMetalFliter.m */,
+				4ACC9B2E22632995009F454F /* CYMetalColorConvertFliter.h */,
+				4ACC9B2F22632995009F454F /* CYMetalColorConvertFliter.m */,
+				4AB290912273F32000C243B6 /* CYMetalDataSource.h */,
+				4AB290922273F32000C243B6 /* CYMetalDataSource.m */,
 			);
 			path = fliter;
 			sourceTree = "<group>";
@@ -248,11 +258,13 @@
 				B521A9D42123CDD9003F9397 /* MetalPlayer.m in Sources */,
 				A515930920EBBC7D004203E2 /* VEVideoEncoder.m in Sources */,
 				A515930620EBBAA1004203E2 /* H264Decoder.m in Sources */,
+				4ACC9B3022632995009F454F /* CYMetalColorConvertFliter.m in Sources */,
 				A50A296720DD4C42006757F9 /* ViewController.m in Sources */,
 				A50A297220DD4C44006757F9 /* main.m in Sources */,
 				4A58FD68226322FE0005029B /* CYMetalTextureOutput.m in Sources */,
 				4A58FD65226322BC0005029B /* CYMetalFliter.m in Sources */,
 				A50A296420DD4C42006757F9 /* AppDelegate.m in Sources */,
+				4AB290932273F32000C243B6 /* CYMetalDataSource.m in Sources */,
 				B521A9D62123D1A6003F9397 /* Shaders.metal in Sources */,
 				A515930320EBBA97004203E2 /* VCVideoCapturer.m in Sources */,
 				A515930220EBBA97004203E2 /* VPVideoStreamPlayLayer.m in Sources */,

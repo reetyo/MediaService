@@ -33,7 +33,9 @@ static void decodeOutputDataCallback(void *decompressionOutputRefCon, void *sour
     // retain再输出，外层去release
     CVPixelBufferRetain(pixelBuffer);
     H264Decoder *decoder = (__bridge H264Decoder *)decompressionOutputRefCon;
-    
+    if(!pixelBuffer){
+        return;
+    }
     if ([decoder.delegate respondsToSelector:@selector(videoDecodeOutputDataCallback:)])
     {
         [decoder.delegate videoDecodeOutputDataCallback:pixelBuffer];

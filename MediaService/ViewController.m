@@ -12,6 +12,7 @@
 #import "H264Decoder.h"
 #import "VCVideoCapturer.h"
 #import "MetalPlayer.h"
+#import "CYMetalDataSource.h"
 
 #define USED_METAL
 
@@ -19,7 +20,8 @@
 
 /** 视频流播放器 */
 #ifdef USED_METAL
-@property (nonatomic, strong) MetalPlayer *playLayer;
+@property (nonatomic, strong) CAMetalLayer *playLayer;
+@property (nonatomic, strong) CYMetalDataSource* metalDataSource;
 #else
 @property (nonatomic, strong) VPVideoStreamPlayLayer *playLayer;
 #endif
@@ -74,7 +76,12 @@
 
     // 初始化视频编码解码后的播放画面
 #ifdef USED_METAL
-    self.playLayer = [[MetalPlayer alloc] initWithFrame:CGRectMake(layerMargin * 2 + layerW, layerY, layerW, layerH)];
+    //self.playLayer = [[MetalPlayer alloc] initWithFrame:CGRectMake(layerMargin * 2 + layerW, layerY, layerW, layerH)];
+    self.metalDataSource = [[CYMetalDataSource alloc] init];
+    [self.metalDataSource setDrawableSize:CGSizeMake(720, 1280)];
+    self.playLayer = self.metalDataSource.displayLayer;
+    self.playLayer.frame = CGRectMake(layerMargin * 2 + layerW, layerY, layerW, layerH);
+    
 #else
     self.playLayer = [[VPVideoStreamPlayLayer alloc] initWithFrame:CGRectMake(layerMargin * 2 + layerW, layerY, layerW, layerH)];
 #endif
@@ -139,7 +146,8 @@
 #pragma mark - H264解码回调
 - (void)videoDecodeOutputDataCallback:(CVImageBufferRef)imageBuffer
 {
-    [self.playLayer inputPixelBuffer:imageBuffer];
+    //[self.playLayer inputPixelBuffer:imageBuffer];
+    [self.metalDataSource inputPixelBuffer:imageBuffer];
     CVPixelBufferRelease(imageBuffer);
 }
 @end

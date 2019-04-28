@@ -12,10 +12,10 @@
 using namespace metal;
 
 
-typedef struct {
-    packed_float2 position;
-    packed_float2 texcoord;
-} Vertex;
+struct VertexInput {
+    float2 position [[attribute(0)]];
+    float2 texcoord [[attribute(1)]];
+} ;
 
 typedef struct {
 	float3x3 matrix;
@@ -25,33 +25,29 @@ typedef struct {
 typedef struct {
     float4 position [[position]];
     float2 texcoord;
-} Varyings;
+} VertexOut;
 
-vertex Varyings vertexPassthrough(
-	device Vertex* verticies [[ buffer(0) ]],
-	unsigned int vid [[ vertex_id ]]
-) {
-    Varyings out;
+vertex VertexOut vertexPassthrough(const VertexInput vertexIn [[stage_in]]) {
+    VertexOut out;
 	
-	device Vertex& v = verticies[vid];
+    out.position = float4(float2(vertexIn.position), 0.0, 1.0);
 	
-    out.position = float4(float2(v.position), 0.0, 1.0);
-	
-	out.texcoord = v.texcoord;
+	out.texcoord = vertexIn.texcoord;
 	
     return out;
 }
 
 fragment half4 fragmentColorConversion(
-	Varyings in [[ stage_in ]],
+	VertexOut vertexIn [[ stage_in ]],
 	texture2d<float, access::sample> textureY [[ texture(0) ]],
 	texture2d<float, access::sample> textureCbCr [[ texture(1) ]],
 	constant ColorConversion &colorConversion [[ buffer(0) ]]
 ) {
 	constexpr sampler s(address::clamp_to_edge, filter::linear);
-	float3 ycbcr = float3(textureY.sample(s, in.texcoord).r, textureCbCr.sample(s, in.texcoord).rg);
+	float3 ycbcr = float3(textureY.sample(s, vertexIn.texcoord).r, textureCbCr.sample(s, vertexIn.texcoord).rg);
 	
 	float3 rgb = colorConversion.matrix * (ycbcr + colorConversion.offset);
 	
-	return half4(half3(rgb), 1.0);
+    return half4(0.1,0.2,0.3,1.0);
+	//return half4(half3(rgb), 1.0);
 }
