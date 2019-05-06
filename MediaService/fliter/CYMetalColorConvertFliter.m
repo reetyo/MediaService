@@ -25,6 +25,10 @@ typedef struct{
 
 Vertex vertices[4] = {
     {
+        .vertexPosition = {-1.0,1.0},
+        .textureCord = {0.0,1.0}
+    },
+    {
         .vertexPosition = {-1.0,-1.0},
         .textureCord ={0.0,0.0}
     },
@@ -33,11 +37,7 @@ Vertex vertices[4] = {
         .textureCord = {1.0,0.0}
     },
     {
-        .vertexPosition = {-1.0,1.0},
-        .textureCord = {0.0,1.0}
-    },
-    {
-        .vertexPosition ={1.0,1.0},
+        .vertexPosition = {1.0,1.0},
         .textureCord = {1.0,1.0}
     },
 };
@@ -71,6 +71,7 @@ ColorConversion colorConversion = {
 
 @property (nonatomic,strong) MTLRenderPassDescriptor* renderPassDescriptor;
 @property (nonatomic,strong) id<MTLBuffer> colorConversionBuffer;
+@property (nonatomic,strong) id<MTLBuffer> vertexBuffer;
 @end
 
 @implementation CYMetalColorConvertFliter
@@ -80,6 +81,8 @@ ColorConversion colorConversion = {
 - (void)setup{
     CVMetalTextureCacheCreate(NULL, NULL, self.device, NULL, &_textureCache);
     self.colorConversionBuffer = [self.device newBufferWithBytes:&colorConversion length:sizeof(colorConversion) options:MTLResourceOptionCPUCacheModeDefault];
+    self.vertexBuffer = [self.device newBufferWithBytes:&vertices length:sizeof(vertices) options:MTLResourceOptionCPUCacheModeDefault];
+    self.colorConversionBuffer.label = @"FullScreen";
     [self loadShader];
 }
 
@@ -136,14 +139,15 @@ ColorConversion colorConversion = {
     
     [renderCommandEncoder pushDebugGroup:@"ColorConvertFilter"];
     [renderCommandEncoder setRenderPipelineState:self.pipelineState];
-    [renderCommandEncoder setVertexBytes:&vertices length:sizeof(vertices) atIndex:VertexInputIndexVertices];
+    [renderCommandEncoder setVertexBytes:&vertices length:sizeof(vertices) atIndex:0];
+    //[renderCommandEncoder setVertexBuffer:self.vertexBuffer offset:0 atIndex:0];
 //    [renderCommandEncoder setVertexBytes:&colorConversion length:sizeof(colorConversion) atIndex:VertexInputIndexConversion];
     [renderCommandEncoder setFragmentTexture:self.textureY atIndex:0];
     [renderCommandEncoder setFragmentTexture:self.textureUV atIndex:1];
     [renderCommandEncoder setFragmentBuffer:self.colorConversionBuffer offset:0 atIndex:0];
     
     
-    [renderCommandEncoder drawPrimitives:MTLPrimitiveTypeTriangleStrip vertexStart:4 vertexCount:1];
+    [renderCommandEncoder drawPrimitives:MTLPrimitiveTypeTriangleStrip vertexStart:0 vertexCount:4];
     [renderCommandEncoder popDebugGroup];
     [renderCommandEncoder endEncoding];
     [commandBuffer commit];
