@@ -48,6 +48,5 @@ fragment half4 fragmentColorConversion(
     
     float3 rgb = colorConversion.matrix * (ycbcr + colorConversion.offset);
 	
-    //return half4(0.9,0.2,0.3,1.0);
-	return half4(half3(rgb), 1.0);
+    return half4(half3(rgb), 1.0);
 }

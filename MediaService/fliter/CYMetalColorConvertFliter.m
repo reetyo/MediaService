@@ -26,18 +26,18 @@ typedef struct{
 Vertex vertices[4] = {
     {
         .vertexPosition = {-1.0,1.0},
-        .textureCord = {0.0,1.0}
+        .textureCord = {0.0,0.0}
     },
     {
         .vertexPosition = {-1.0,-1.0},
-        .textureCord ={0.0,0.0}
-    },
-    {
-        .vertexPosition = {1.0,-1.0},
-        .textureCord = {1.0,0.0}
+        .textureCord ={0.0,1.0}
     },
     {
         .vertexPosition = {1.0,1.0},
+        .textureCord = {1.0,0.0}
+    },
+    {
+        .vertexPosition = {1.0,-1.0},
         .textureCord = {1.0,1.0}
     },
 };
@@ -120,8 +120,8 @@ ColorConversion colorConversion = {
     vertixDescriptor.attributes[0].offset = 0;
     vertixDescriptor.attributes[1].format = MTLAttributeFormatFloat2;
     vertixDescriptor.attributes[1].bufferIndex = 0;
-    vertixDescriptor.attributes[1].offset = 2 * sizeof(float);
-    vertixDescriptor.layouts[0].stride = sizeof(vertices);
+    vertixDescriptor.attributes[1].offset = sizeof(vector_float2);
+    vertixDescriptor.layouts[0].stride = sizeof(Vertex);
     
     return vertixDescriptor;
 }
@@ -139,15 +139,13 @@ ColorConversion colorConversion = {
     
     [renderCommandEncoder pushDebugGroup:@"ColorConvertFilter"];
     [renderCommandEncoder setRenderPipelineState:self.pipelineState];
-    [renderCommandEncoder setVertexBytes:&vertices length:sizeof(vertices) atIndex:0];
-    //[renderCommandEncoder setVertexBuffer:self.vertexBuffer offset:0 atIndex:0];
-//    [renderCommandEncoder setVertexBytes:&colorConversion length:sizeof(colorConversion) atIndex:VertexInputIndexConversion];
+    [renderCommandEncoder setVertexBytes:&vertices length:sizeof(vertices)  atIndex:0];
+
     [renderCommandEncoder setFragmentTexture:self.textureY atIndex:0];
     [renderCommandEncoder setFragmentTexture:self.textureUV atIndex:1];
     [renderCommandEncoder setFragmentBuffer:self.colorConversionBuffer offset:0 atIndex:0];
     
-    
-    [renderCommandEncoder drawPrimitives:MTLPrimitiveTypeTriangleStrip vertexStart:0 vertexCount:4];
+    [renderCommandEncoder drawPrimitives:MTLPrimitiveTypeTriangleStrip vertexStart:0 vertexCount:4 instanceCount:1];
     [renderCommandEncoder popDebugGroup];
     [renderCommandEncoder endEncoding];
     [commandBuffer commit];
