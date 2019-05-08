@@ -50,13 +50,9 @@
     self.colorConvertFliter.commandBuffer = commandBuffer;
     id<CAMetalDrawable> drawable = [self.displayLayer nextDrawable];
     [self.colorConvertFliter setOutputTexture:drawable.texture];
-    [commandBuffer presentDrawable:drawable];
-//    [commandBuffer addCompletedHandler:^(id<MTLCommandBuffer> _Nonnull buffer) {
-//        CVPixelBufferRef outBuffer;
-//        CVPixelBufferCreateWithBytes(kCFAllocatorDefault, drawable.texture.width, drawable.texture.height, kCVPixelFormatType_32BGRA, drawable.texture.buffer.contents, drawable.texture.bufferBytesPerRow, nil, nil, nil, &outBuffer);
-//        int a = 1;
-//    }];
     [self.colorConvertFliter processYUVBuffer:buffer];
+    [commandBuffer presentDrawable:drawable];
+    [commandBuffer commit];
 }
 
 #pragma mark -

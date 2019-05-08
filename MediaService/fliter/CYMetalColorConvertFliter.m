@@ -148,7 +148,6 @@ ColorConversion colorConversion = {
     [renderCommandEncoder drawPrimitives:MTLPrimitiveTypeTriangleStrip vertexStart:0 vertexCount:4 instanceCount:1];
     [renderCommandEncoder popDebugGroup];
     [renderCommandEncoder endEncoding];
-    [commandBuffer commit];
 }
 
 - (void)setTextureY:(id<MTLTexture>)textureY TextureUV:(id<MTLTexture>)textureUV{
@@ -192,12 +191,9 @@ ColorConversion colorConversion = {
     
     if(textureY != nil && textureCbCr != nil)
     {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            // always assign the textures atomic
             self->_textureY = textureY;
             self->_textureUV = textureCbCr;
             [self newFrameReady];
-        });
     }
     else{
         NSLog(@"strange frame!!");
