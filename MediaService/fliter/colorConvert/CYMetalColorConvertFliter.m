@@ -63,13 +63,11 @@ ColorConversion colorConversion = {
     CVMetalTextureCacheRef _textureCache;
 }
 
-@property (nonatomic,strong) id<MTLLibrary> defaultLibrary;
 @property (nonatomic,strong) id <MTLRenderPipelineState> pipelineState;
 
 @property (nonatomic,strong) id<MTLTexture> textureY;
 @property (nonatomic,strong) id<MTLTexture> textureUV;
 
-@property (nonatomic,strong) MTLRenderPassDescriptor* renderPassDescriptor;
 @property (nonatomic,strong) id<MTLBuffer> colorConversionBuffer;
 @property (nonatomic,strong) id<MTLBuffer> vertexBuffer;
 @end
@@ -79,6 +77,8 @@ ColorConversion colorConversion = {
 #pragma mark - load
 
 - (void)setup{
+    [super setup];
+    
     CVMetalTextureCacheCreate(NULL, NULL, self.device, NULL, &_textureCache);
     self.colorConversionBuffer = [self.device newBufferWithBytes:&colorConversion length:sizeof(colorConversion) options:MTLResourceOptionCPUCacheModeDefault];
     self.vertexBuffer = [self.device newBufferWithBytes:&vertices length:sizeof(vertices) options:MTLResourceOptionCPUCacheModeDefault];
@@ -87,8 +87,6 @@ ColorConversion colorConversion = {
 }
 
 - (void)loadShader{
-    self.defaultLibrary = [self.device newDefaultLibrary];
-    
     id <MTLFunction> fragmentProgram = [self.defaultLibrary newFunctionWithName:@"fragmentColorConversion"];
     
     // Load the vertex program into the library
@@ -198,17 +196,6 @@ ColorConversion colorConversion = {
     else{
         NSLog(@"strange frame!!");
     }
-}
-
-- (MTLRenderPassDescriptor*)renderPassDescriptor{
-    if(_renderPassDescriptor == nil){
-        _renderPassDescriptor = [MTLRenderPassDescriptor renderPassDescriptor];
-    }
-    _renderPassDescriptor.colorAttachments[0].texture = self.outputTexture;
-    _renderPassDescriptor.colorAttachments[0].loadAction = MTLLoadActionClear;
-    _renderPassDescriptor.colorAttachments[0].clearColor = MTLClearColorMake(0.65f, 0.65f, 0.65f, 1.0f);
-    _renderPassDescriptor.colorAttachments[0].storeAction = MTLStoreActionStore;
-    return _renderPassDescriptor;
 }
 
 @end

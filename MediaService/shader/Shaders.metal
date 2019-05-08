@@ -50,3 +50,18 @@ fragment half4 fragmentColorConversion(
 	
     return half4(half3(rgb), 1.0);
 }
+
+fragment half4 fragmentBrightness(
+                                       VertexOut vertexIn [[ stage_in ]],
+                                       texture2d<float, access::sample> textureY [[ texture(0) ]],
+                                       texture2d<float, access::sample> textureCbCr [[ texture(1) ]],
+                                       constant ColorConversion &colorConversion [[ buffer(0) ]]
+                                       ) {
+    constexpr sampler s(address::clamp_to_edge, filter::linear);
+    float3 ycbcr = float3(textureY.sample(s, vertexIn.texcoord).r, textureCbCr.sample(s, vertexIn.texcoord).rg);
+    
+    float3 rgb = colorConversion.matrix * (ycbcr + colorConversion.offset);
+    
+    return half4(half2(rg),0.5, 1.0);
+}
+

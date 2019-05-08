@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		4A58FD65226322BC0005029B /* CYMetalFliter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A58FD64226322BC0005029B /* CYMetalFliter.m */; };
 		4A58FD68226322FE0005029B /* CYMetalTextureOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A58FD67226322FE0005029B /* CYMetalTextureOutput.m */; };
+		4A66072D228317BD001FB0B7 /* CYMetalColorBrightnessFliter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A66072C228317BD001FB0B7 /* CYMetalColorBrightnessFliter.m */; };
+		4A660731228317E0001FB0B7 /* CYMetalTextureCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A660730228317E0001FB0B7 /* CYMetalTextureCache.m */; };
 		4AB290932273F32000C243B6 /* CYMetalDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB290922273F32000C243B6 /* CYMetalDataSource.m */; };
 		4ACC9B3022632995009F454F /* CYMetalColorConvertFliter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACC9B2F22632995009F454F /* CYMetalColorConvertFliter.m */; };
 		A50A296420DD4C42006757F9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A50A296320DD4C42006757F9 /* AppDelegate.m */; };
@@ -33,6 +35,10 @@
 		4A58FD66226322FE0005029B /* CYMetalTextureOutput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYMetalTextureOutput.h; sourceTree = "<group>"; };
 		4A58FD67226322FE0005029B /* CYMetalTextureOutput.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CYMetalTextureOutput.m; sourceTree = "<group>"; };
 		4A58FD69226323160005029B /* CYMetalTextureInput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYMetalTextureInput.h; sourceTree = "<group>"; };
+		4A66072B228317BD001FB0B7 /* CYMetalColorBrightnessFliter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYMetalColorBrightnessFliter.h; sourceTree = "<group>"; };
+		4A66072C228317BD001FB0B7 /* CYMetalColorBrightnessFliter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CYMetalColorBrightnessFliter.m; sourceTree = "<group>"; };
+		4A66072F228317E0001FB0B7 /* CYMetalTextureCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYMetalTextureCache.h; sourceTree = "<group>"; };
+		4A660730228317E0001FB0B7 /* CYMetalTextureCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CYMetalTextureCache.m; sourceTree = "<group>"; };
 		4AB290912273F32000C243B6 /* CYMetalDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYMetalDataSource.h; sourceTree = "<group>"; };
 		4AB290922273F32000C243B6 /* CYMetalDataSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CYMetalDataSource.m; sourceTree = "<group>"; };
 		4ACC9B2E22632995009F454F /* CYMetalColorConvertFliter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYMetalColorConvertFliter.h; sourceTree = "<group>"; };
@@ -125,17 +131,44 @@
 		4A58FD6122631C2D0005029B /* fliter */ = {
 			isa = PBXGroup;
 			children = (
+				4A66072A228317A3001FB0B7 /* brightness */,
+				4A6607292283178D001FB0B7 /* colorConvert */,
 				4A58FD69226323160005029B /* CYMetalTextureInput.h */,
 				4A58FD66226322FE0005029B /* CYMetalTextureOutput.h */,
 				4A58FD67226322FE0005029B /* CYMetalTextureOutput.m */,
 				4A58FD63226322BC0005029B /* CYMetalFliter.h */,
 				4A58FD64226322BC0005029B /* CYMetalFliter.m */,
-				4ACC9B2E22632995009F454F /* CYMetalColorConvertFliter.h */,
-				4ACC9B2F22632995009F454F /* CYMetalColorConvertFliter.m */,
 				4AB290912273F32000C243B6 /* CYMetalDataSource.h */,
 				4AB290922273F32000C243B6 /* CYMetalDataSource.m */,
 			);
 			path = fliter;
+			sourceTree = "<group>";
+		};
+		4A6607292283178D001FB0B7 /* colorConvert */ = {
+			isa = PBXGroup;
+			children = (
+				4ACC9B2E22632995009F454F /* CYMetalColorConvertFliter.h */,
+				4ACC9B2F22632995009F454F /* CYMetalColorConvertFliter.m */,
+			);
+			path = colorConvert;
+			sourceTree = "<group>";
+		};
+		4A66072A228317A3001FB0B7 /* brightness */ = {
+			isa = PBXGroup;
+			children = (
+				4A66072B228317BD001FB0B7 /* CYMetalColorBrightnessFliter.h */,
+				4A66072C228317BD001FB0B7 /* CYMetalColorBrightnessFliter.m */,
+			);
+			path = brightness;
+			sourceTree = "<group>";
+		};
+		4A66072E228317D1001FB0B7 /* metal */ = {
+			isa = PBXGroup;
+			children = (
+				4A66072F228317E0001FB0B7 /* CYMetalTextureCache.h */,
+				4A660730228317E0001FB0B7 /* CYMetalTextureCache.m */,
+			);
+			path = metal;
 			sourceTree = "<group>";
 		};
 		A50A295620DD4C42006757F9 = {
@@ -158,6 +191,7 @@
 		A50A296120DD4C42006757F9 /* MediaService */ = {
 			isa = PBXGroup;
 			children = (
+				4A66072E228317D1001FB0B7 /* metal */,
 				4A58FD6122631C2D0005029B /* fliter */,
 				4A58FD562261CA3E0005029B /* shader */,
 				4A58FD552261CA2E0005029B /* player */,
@@ -259,12 +293,14 @@
 				A515930920EBBC7D004203E2 /* VEVideoEncoder.m in Sources */,
 				A515930620EBBAA1004203E2 /* H264Decoder.m in Sources */,
 				4ACC9B3022632995009F454F /* CYMetalColorConvertFliter.m in Sources */,
+				4A66072D228317BD001FB0B7 /* CYMetalColorBrightnessFliter.m in Sources */,
 				A50A296720DD4C42006757F9 /* ViewController.m in Sources */,
 				A50A297220DD4C44006757F9 /* main.m in Sources */,
 				4A58FD68226322FE0005029B /* CYMetalTextureOutput.m in Sources */,
 				4A58FD65226322BC0005029B /* CYMetalFliter.m in Sources */,
 				A50A296420DD4C42006757F9 /* AppDelegate.m in Sources */,
 				4AB290932273F32000C243B6 /* CYMetalDataSource.m in Sources */,
+				4A660731228317E0001FB0B7 /* CYMetalTextureCache.m in Sources */,
 				B521A9D62123D1A6003F9397 /* Shaders.metal in Sources */,
 				A515930320EBBA97004203E2 /* VCVideoCapturer.m in Sources */,
 				A515930220EBBA97004203E2 /* VPVideoStreamPlayLayer.m in Sources */,

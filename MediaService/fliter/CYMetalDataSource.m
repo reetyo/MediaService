@@ -10,14 +10,20 @@
 #import <Metal/Metal.h>
 #import "CYMetalTextureInput.h"
 #import "CYMetalColorConvertFliter.h"
+#import "CYMetalColorBrightnessFliter.h"
 #import <CoreVideo/CoreVideo.h>
+#import "CYMetalTextureCache.h"
 
 @interface  CYMetalDataSource()
 
 @property (nonatomic,strong) CYMetalColorConvertFliter* colorConvertFliter;
+@property (nonatomic,strong) CYMetalColorBrightnessFliter* brightnessFliter;
+
 @property (nonatomic,strong) NSMutableArray<id<CYMetalTextureInput>>* inputArray;
 @property (nonatomic,strong) id<MTLCommandQueue> commandQueue;
 @property (nonatomic,strong) id<MTLDevice> mtlDevice;
+
+@property (nonatomic,strong) CYMetalTextureCache* textureCache;
 
 @end
 
@@ -29,13 +35,18 @@
         self.mtlDevice = MTLCreateSystemDefaultDevice();
         self.commandQueue = [self.mtlDevice newCommandQueue];
         
-        self.colorConvertFliter = [[CYMetalColorConvertFliter alloc] initWithDevice:self.mtlDevice];
+        self.textureCache = [[CYMetalTextureCache alloc] initWithDevice:self.mtlDevice];
+        
+        [self setupPipeline];
     }
     return self;
 }
 
 - (void)setupPipeline{
     self.colorConvertFliter = [[CYMetalColorConvertFliter alloc] initWithDevice:self.mtlDevice];
+    
+    self.brightnessFliter = [[CYMetalColorBrightnessFliter alloc] initWithDevice:self.mtlDevice];
+    [self.colorConvertFliter addTextureInput:self.brightnessFliter];
 }
 
 #pragma mark - process flow
@@ -48,10 +59,15 @@
     [self.commandQueue insertDebugCaptureBoundary];
     id<MTLCommandBuffer> commandBuffer = [self.commandQueue commandBuffer];
     self.colorConvertFliter.commandBuffer = commandBuffer;
-    id<CAMetalDrawable> drawable = [self.displayLayer nextDrawable];
-    [self.colorConvertFliter setOutputTexture:drawable.texture];
+    //id<CAMetalDrawable> drawable = [self.displayLayer nextDrawable];
+//    [self.colorConvertFliter setOutputTexture:drawable.texture];
+//    [self.colorConvertFliter processYUVBuffer:buffer];
+//    [commandBuffer presentDrawable:drawable];
+    
+    CGSize textureSize = CGSizeMake(720, 1280);
+    [self.colorConvertFliter setOutputTexture:[self.textureCache getTextureWithSize:textureSize]];
     [self.colorConvertFliter processYUVBuffer:buffer];
-    [commandBuffer presentDrawable:drawable];
+    
     [commandBuffer commit];
 }
 
